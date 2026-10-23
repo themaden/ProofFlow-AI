@@ -14,3 +14,11 @@ def test_train_pipeline():
 
 def test_all_features_present():
     assert all(name in synthetic_invoices(50) for name in FEATURES)
+
+def test_reproducible_benchmark():
+    from proofflow.benchmark import evaluate
+    a=evaluate(n=240)
+    b=evaluate(n=240)
+    assert a==b
+    assert a['dataset']=='synthetic_only'
+    assert 0 <= a['roc_auc'] <= 1
