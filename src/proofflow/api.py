@@ -1,4 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
+from importlib.resources import files
 from .auth import identity, operator, reviewer
 from .models import Case, CaseInput, Decision
 from .service import CaseService
@@ -53,3 +55,8 @@ def submit_case(case_id: str, role: str = Depends(operator)):
         raise HTTPException(404,"Case not found") from exc
     except InvalidTransition as exc:
         raise HTTPException(409,str(exc)) from exc
+
+
+@app.get("/demo", response_class=HTMLResponse, include_in_schema=False)
+def demo():
+    return (files("proofflow") / "static" / "index.html").read_text(encoding="utf-8")
