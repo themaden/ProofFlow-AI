@@ -24,3 +24,7 @@ Open `http://127.0.0.1:8000/docs` and POST the example in `examples/request.json
 - This code makes no claim of bank-specific compliance or credit underwriting.
 
 See [architecture](docs/architecture.md), [security](docs/security.md), [licensing](THIRD_PARTY_LICENSES.md) and [roadmap](docs/roadmap.md).
+
+## Jupyter research
+
+Four executable ML notebooks (EDA, training, evaluation, error analysis) are in [`notebooks/`](notebooks/README.md). Install with `pip install -e ".[notebooks,dev]"`. Uses synthetic data and a reproducible scikit-learn pipeline; evaluation is **not** valid evidence for actual financial decisions.
