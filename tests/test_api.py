@@ -1,9 +1,14 @@
+import os
+os.environ["PROOFFLOW_DB"] = ":memory:"
+os.environ["PROOFFLOW_OPERATOR_KEY"] = "operator-test-secret"
+os.environ["PROOFFLOW_REVIEWER_KEY"] = "reviewer-test-secret"
 import json
 from pathlib import Path
 from fastapi.testclient import TestClient
 from proofflow.api import app
 
 client = TestClient(app)
+client.headers.update({"x-api-key": "operator-test-secret"})
 
 
 def payload():
@@ -41,7 +46,7 @@ def test_review_gate():
     case_id = case["id"]
     assert case["state"] == "needs_review"
     assert client.post(f"/cases/{case_id}/submit").status_code == 409
-    assert client.post(f"/cases/{case_id}/decision", json={"actor": "reviewer", "approve": True}).json()["state"] == "approved_by_human"
+    assert client.post(f"/cases/{case_id}/decision", json={"actor": "reviewer", "approve": True}, headers={"x-api-key":"reviewer-test-secret"}).json()["state"] == "approved_by_human"
     assert client.post(f"/cases/{case_id}/submit").status_code == 200
 
 
