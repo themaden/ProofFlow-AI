@@ -1,0 +1,4 @@
+{
+  "invoice": {"invoice_id": "INV-100", "supplier_id": "SUP-02", "po_id": "PO-100", "amount": "1250.00", "currency": "USD"},
+  "purchase_order": {"po_id": "PO-100", "supplier_id": "SUP-02", "amount": "1250.00", "currency": "USD"}
+}
