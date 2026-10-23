@@ -8,7 +8,7 @@ def identity(x_api_key: str | None = Header(default=None)) -> str:
         raise HTTPException(401, "API key required")
     keys = {"operator": os.getenv("PROOFFLOW_OPERATOR_KEY"), "reviewer": os.getenv("PROOFFLOW_REVIEWER_KEY")}
     for role, key in keys.items():
-        if key and compare_digest(x_api_key,key):
+        if key and len(key) >= 16 and compare_digest(x_api_key,key):
             return role
     raise HTTPException(401, "Invalid API key")
 

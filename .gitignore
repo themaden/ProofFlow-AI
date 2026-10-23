@@ -7,3 +7,21 @@ __pycache__/
 *.egg-info/
 dist/
 artifacts/
+# Local secrets and runtime credentials
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials.json
+# Local databases, generated artifacts and notebook state
+*.sqlite
+*.sqlite3
+*.db-*
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+.cache/
+.DS_Store
